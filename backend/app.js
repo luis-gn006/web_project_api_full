@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const notFoundRouter = require('./routes/notFound');
+const {login, createUser} = require('./controllers/users')
 
 mongoose.connect('mongodb://localhost:27017/aroundb')
   .then(() => {
@@ -23,6 +24,9 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.post('/signin', login);
+app.post('/signup', createUser);
 
 app.use('/', usersRouter);
 app.use('/', cardsRouter);

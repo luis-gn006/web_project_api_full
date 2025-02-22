@@ -37,30 +37,11 @@ module.exports.getUser = (req, res) => {
 
 module.exports.createUser = (req, res) => {
   const { email, password, name, about, avatar } = req.body;
-  const hash = bcrypt.hash(password, 10);
-  userSchema.create({ email, password: hash, name, about, avatar })
-    .then((user) => res.send({ data: user }))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        const validatorError = new ValidationError();
-        res.status(validatorError.statusCode).send({
-          error: {
-            name: validatorError.name,
-            message: validatorError.message,
-            statusCode: validatorError.statusCode,
-          },
-        });
-      } else {
-        const serverError = new ApiError();
-        res.status(serverError.statusCode).send({
-          error: {
-            name: serverError.name,
-            message: serverError.message,
-            statusCode: serverError.statusCode,
-          },
-        });
-      }
-    });
+  bcrypt.hash(password, 10).then((hash) => {
+    userSchema.create({ email, password: hash, name, about, avatar })
+    .then((user) => res.status(201).json({ _id: user._id, email: user.email }))
+    .catch((err) => res.status(400).send({ error: err.message }));
+  });
 };
 
 module.exports.updateUser = (req, res) => {
@@ -124,11 +105,12 @@ module.exports.updateAvatar = (req, res) => {
 module.exports.login = (req, res) => {
   const { email, password } = req.body;
 
-  userSchema.findOne({ email })
+  userSchema.findOne({ email }).select("+password")
     .then((user) => {
       if (!user) {
         return Promise.reject(new Error('Incorrect password or email'));
       }
+
       return bcrypt.compare(password, user.password);
     })
     .then((matched) => {
