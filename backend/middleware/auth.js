@@ -1,8 +1,12 @@
 const jwt = require('jsonwebtoken');
+require("dotenv").config();
+
+const { JWT_SECRET } = process.env;
+
 
 const handleAuthError = (res) => {
   res
-    .status(401)
+    .status(403)
     .send({ message: 'Error de autorización' });
 };
 
