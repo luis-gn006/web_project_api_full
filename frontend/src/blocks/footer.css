@@ -1,0 +1,20 @@
+.footer {
+  color: #545454;
+  font-size: 18px;
+  padding-bottom: 18%;
+}
+.footer__copyright {
+  margin: 0;
+}
+
+@media screen and (min-width: 800px) {
+  .footer {
+    width: 680px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .footer {
+    width: 880px;
+    padding-bottom: 4.3%;
+  }
+}

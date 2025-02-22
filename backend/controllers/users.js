@@ -124,3 +124,27 @@ module.exports.login = (req, res) => {
       res.status(401).send({ message: err.message });
     });
 };
+
+module.exports.getCurrentUser = (req,res) => {
+  userSchema.findById({ _id: req._id })
+  .orFail(() => {
+    const serverError = new ApiError();
+      res.status(serverError.statusCode).send({
+        error: {
+          name: serverError.name,
+          message: serverError.message,
+          statusCode: serverError.statusCode,
+        },
+      });
+  })
+  .then((user) => {
+    res.json(user);
+  })
+
+  .catch((err) => {
+    const statusCode = err.statusCode || 500;
+    res
+      .status(statusCode)
+      .send({ message: "Error finding User", error: err.message });
+  });
+}

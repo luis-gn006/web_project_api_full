@@ -1,0 +1,102 @@
+.element {
+  width: 80%;
+}
+.element__image-content {
+  position: relative;
+  height: 282px;
+}
+.element__image {
+  width: 282px;
+  height: 282px;
+  border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
+  display: flex;
+}
+.element__button-trash {
+  position: absolute;
+  background: url(../images/element__trash.svg) no-repeat center;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  padding: 5px;
+  border: none;
+  top: 6%;
+  right: -15%;
+  filter: drop-shadow(0 0 10px #000000ce);
+}
+.element__button-trash-hide {
+  display: none;
+}
+.element__button-trash:hover {
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 4px #000);
+  cursor: pointer;
+}
+.element__footer {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 11%;
+  padding-bottom: 13%;
+  width: 282px;
+  height: 22px;
+  border-bottom-left-radius: 3%;
+  border-bottom-right-radius: 3%;
+}
+.element__name {
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 5%;
+}
+.element__like-container {
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.element__button-like {
+  background: url(../images/element__like.svg) no-repeat center;
+  background-size: contain;
+  width: 8px;
+  height: 16px;
+  border: none;
+  box-sizing: content-box;
+}
+.element__button-like:hover {
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 4px #000);
+  cursor: pointer;
+}
+.element__likes {
+  color: #000;
+  margin: 0;
+}
+.element__likes-disactive {
+  display: none;
+}
+.element__button-like-active {
+  background: url(../images/element__like-active.svg) no-repeat center;
+  background-size: contain;
+  width: 8px;
+  height: 16px;
+  border: none;
+  box-sizing: content-box;
+}
+.element__button-like-active:hover {
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 4px #000);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 800px) {
+  .element__button-trash {
+    right: -15%;
+  }
+}
