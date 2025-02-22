@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const ApiError = require('../components/ApiError');
 const ValidationError = require('../components/ValidationError');
+require("dotenv").config();
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res) => {
   userSchema.find({})
@@ -105,26 +108,19 @@ module.exports.updateAvatar = (req, res) => {
 module.exports.login = (req, res) => {
   const { email, password } = req.body;
 
-  userSchema.findOne({ email }).select("+password")
+  userSchema.findUserByCredentials(email, password)
     .then((user) => {
-      if (!user) {
-        return Promise.reject(new Error('Incorrect password or email'));
-      }
 
-      return bcrypt.compare(password, user.password);
-    })
-    .then((matched) => {
-      if (!matched) {
-        // los hashes no coinciden, se rechaza el promise
-        return Promise.reject(new Error('Incorrect password or email'));
-      }
-      // autenticación exitosa
-      const token = jwt.sign({ _id: user._id }, 'secret-super-duper',{expiresIn: '7d'});
-      res.send({token});
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
+        {
+          expiresIn: "7d",
+        }
+      );
+      res.send({ token });
     })
     .catch((err) => {
-      res
-        .status(401)
-        .send({ message: err.message });
+      res.status(401).send({ message: err.message });
     });
 };
