@@ -1,4 +1,5 @@
 const userSchema = require('../models/user');
+const bcrypt = require("bcryptjs");
 const ApiError = require('../components/ApiError');
 const ValidationError = require('../components/ValidationError');
 
@@ -33,8 +34,9 @@ module.exports.getUser = (req, res) => {
 };
 
 module.exports.createUser = (req, res) => {
-  const { name, about, avatar } = req.body;
-  userSchema.create({ name, about, avatar })
+  const { email, password, name, about, avatar } = req.body;
+  const hash = bcrypt.hash(password, 10);
+  userSchema.create({ email, password: hash, name, about, avatar })
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
