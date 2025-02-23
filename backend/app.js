@@ -7,6 +7,7 @@ const {login, createUser} = require('./controllers/users');
 const auth = require("./middleware/auth");
 
 const { celebrate, Joi, errors } = require("celebrate");
+const { requestLogger, errorLogger } = require('./middleware/logger');
 
 mongoose.connect('mongodb://localhost:27017/aroundb')
   .then(() => {
@@ -19,6 +20,7 @@ mongoose.connect('mongodb://localhost:27017/aroundb')
 const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
+app.use(requestLogger);
 
 /*
 app.use((req, res, next) => {
@@ -57,6 +59,7 @@ app.use('/', usersRouter);
 app.use('/', cardsRouter);
 app.use('/', notFoundRouter);
 
+app.use(errorLogger);
 app.use(errors());
 
 app.listen(PORT, () => {
