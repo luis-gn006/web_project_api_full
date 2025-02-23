@@ -6,7 +6,7 @@ const ApiError = require('../components/ApiError');
 const ValidationError = require('../components/ValidationError');
 require("dotenv").config();
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res) => {
   userSchema.find({})
@@ -126,7 +126,7 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.getCurrentUser = (req,res) => {
-  userSchema.findById({ _id: req._id })
+  userSchema.findById({ _id: req.user._id })
   .orFail(() => {
     const serverError = new ApiError();
       res.status(serverError.statusCode).send({

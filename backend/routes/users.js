@@ -6,7 +6,8 @@ const {
 } = require('../controllers/users');
 
 usersRouter.get('/users', getUsers);
-usersRouter.patch('/users/me', getCurrentUser);
+usersRouter.get('/users/me', getCurrentUser);
+usersRouter.patch('/users/me', updateUser);
 usersRouter.get('/users/:id', doesUserExist, getUser);
 /*usersRouter.post('/users', createUser);*/
 usersRouter.patch('/users/me/avatar', updateAvatar);
