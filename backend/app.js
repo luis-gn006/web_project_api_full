@@ -5,6 +5,7 @@ const cardsRouter = require('./routes/cards');
 const notFoundRouter = require('./routes/notFound');
 const {login, createUser} = require('./controllers/users');
 const auth = require("./middleware/auth");
+const cors = require("cors");
 
 const { celebrate, Joi, errors } = require("celebrate");
 const { requestLogger, errorLogger } = require('./middleware/logger');
@@ -18,6 +19,18 @@ mongoose.connect('mongodb://localhost:27017/aroundb')
   });
 
 const { PORT = 3000 } = process.env;
+
+app.use(cors());
+app.options("*", cors());
+
+const allowedCors = [
+  "http://localhost:3001",
+  "https://www.triparound.mooo.com",
+  "https://triparound.mooo.com",
+];
+
+app.use(cors({ origin: allowedCors }));
+
 const app = express();
 app.use(express.json());
 app.use(requestLogger);
