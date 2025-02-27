@@ -71,16 +71,7 @@ function App() {
   //Cards
   const [isCards, setIsCards] = React.useState(false);
   const [cards, setCards] = React.useState([]);
-  //Cargar tarjetas
-  React.useEffect(() => {
-    setIsCards(true);
-    api
-      .getInitialCards()
-      .then((cards) => setCards(cards))
-      .finally(() => {
-        setIsCards(false);
-      });
-  }, []);
+
   //Borrar tarjetas
   const handleConfirmDeleteCard = () => {
     if (cardToDelete) {
@@ -188,8 +179,8 @@ function App() {
     if (isLoggedIn) {
       api.getUserInfo().then((user) => {
         setCurrentUser(user);
-        api.getInitialCards().then((cards) => {
-          setCards(cards);
+        api.getInitialCards().then(({data}) => {
+          setCards(data);
         });
       });
     }
@@ -205,9 +196,10 @@ function App() {
     }
     auth
       .getUserToken(jwt)
-      .then(({  data }) => {
+      .then((  user ) => {
+        setCurrentUser(user);
         setIsLoggedIn(true);
-        setEmail( data.email );
+        setEmail( user.email );
         navigate("/");
       })
       .catch(console.error);
