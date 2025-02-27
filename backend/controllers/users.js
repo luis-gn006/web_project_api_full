@@ -10,7 +10,7 @@ const { JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res) => {
   userSchema.find({})
-    .then((user) => res.send( user ))
+    .then((user) => res.json( user ))
     .catch((err) => {
       const serverError = new ApiError();
       res.status(serverError.statusCode).send({
@@ -25,7 +25,7 @@ module.exports.getUsers = (req, res) => {
 
 module.exports.getUser = (req, res) => {
   userSchema.findById(req.params.id)
-    .then((user) => res.send( user ))
+    .then((user) => res.json( user ))
     .catch((err) => {
       const serverError = new ApiError();
       res.status(serverError.statusCode).send({
