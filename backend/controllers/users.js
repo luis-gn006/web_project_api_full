@@ -10,7 +10,7 @@ const { JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res) => {
   userSchema.find({})
-    .then((user) => res.send({ user }))
+    .then((user) => res.send( user ))
     .catch((err) => {
       const serverError = new ApiError();
       res.status(serverError.statusCode).send({
@@ -25,7 +25,7 @@ module.exports.getUsers = (req, res) => {
 
 module.exports.getUser = (req, res) => {
   userSchema.findById(req.params.id)
-    .then((user) => res.send({ user }))
+    .then((user) => res.send( user ))
     .catch((err) => {
       const serverError = new ApiError();
       res.status(serverError.statusCode).send({
@@ -54,7 +54,7 @@ module.exports.updateUser = (req, res) => {
     { name, about },
     { new: true, runValidators: true },
   )
-    .then((user) => res.send({ message: 'Usuario actualizado', user }))
+    .then((user) => res.send({ message: 'Usuario actualizado'}, user ))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const validatorError = new ValidationError();
@@ -81,7 +81,7 @@ module.exports.updateUser = (req, res) => {
 module.exports.updateAvatar = (req, res) => {
   const { avatar } = req.body;
   userSchema.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .then((user) => res.send({ message: 'Usuario actualizado', user }))
+    .then((user) => res.send({ message: 'Usuario actualizado'}, user ))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const validatorError = new ValidationError();
