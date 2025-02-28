@@ -92,22 +92,22 @@ function App() {
   }
   //Actualizar info perfil
   const handleUpdateUser = async ({ name, about }) => {
-    return await api.patchUserInfo(name, about).then((newUserInfo) => {
-      setCurrentUser(newUserInfo);
+    return await api.patchUserInfo(name, about).then(({data}) => {
+      setCurrentUser(data);
       closeAllPopups();
     });
   };
   //Crear nueva tarjeta
   const handleAddPlace = async ({ name, url }) => {
-    return await api.postNewCard(name, url).then((newCard) => {
-      setCards([newCard, ...cards]);
+    return await api.postNewCard(name, url).then(({data}) => {
+      setCards([data, ...cards]);
       closeAllPopups();
     });
   };
   //Actualizar avatar
   const handleUpdateAvatar = async ({ avatar }) => {
-    return await api.patchUserAvatar(avatar).then((newAvatar) => {
-      setCurrentUser(newAvatar);
+    return await api.patchUserAvatar(avatar).then(({data}) => {
+      setCurrentUser(data);
       closeAllPopups();
     });
   };
@@ -159,7 +159,7 @@ function App() {
   const navigate = useNavigate();
 
   const updateUserInfo = () => {
-    api.getUserInfo().then((data) => {
+    api.getUserInfo().then(({data}) => {
       setCurrentUser(data);
       setIsLoggedIn(true);
       navigate('/');
