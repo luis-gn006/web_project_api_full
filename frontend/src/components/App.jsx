@@ -158,11 +158,15 @@ function App() {
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
+  //update user info
   const updateUserInfo = () => {
     api.getUserInfo().then(({data}) => {
-      setCurrentUser(data);
-      setIsLoggedIn(true);
-      navigate('/');
+      if(data) {
+        setCurrentUser(data);
+        setIsLoggedIn(true);
+        navigate('/');
+        setEmail( data.email );
+      }
     })
   }
 
@@ -177,11 +181,24 @@ function App() {
   //Checeo de si hay una sesion iniciada
   React.useEffect(() => {
     if (isLoggedIn) {
-      api.getUserInfo().then((user) => {
+      const jwt = token.getToken();
+
+    if (!jwt) {
+      navigate("/login");
+      return;
+    }
+    auth
+      .getUserToken(jwt)
+      .then((  user ) => {
+        console.log(user);
         setCurrentUser(user);
-        api.getInitialCards().then(({data}) => {
-          setCards(data);
-        });
+        setEmail( user.email );
+        setIsLoggedIn(true);
+        navigate("/");
+      })
+      .catch(console.error);
+      api.getInitialCards().then(({data}) => {
+        setCards(data);
       });
     }
   }, [isLoggedIn]);
@@ -197,9 +214,10 @@ function App() {
     auth
       .getUserToken(jwt)
       .then((  user ) => {
+        console.log(user);
         setCurrentUser(user);
-        setIsLoggedIn(true);
         setEmail( user.email );
+        setIsLoggedIn(true);
         navigate("/");
       })
       .catch(console.error);
