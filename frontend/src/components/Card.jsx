@@ -10,7 +10,7 @@ function Card({
   handleCardLike,
 }) {
   const { currentUser } = React.useContext(CurrentUserContext);
-  const isOwn = card.owner._id === currentUser?._id;
+  const isOwn = card.owner === currentUser?._id;
   const isLiked = card.likes.some((i) => i._id === currentUser?._id);
   const deleteCard = () => {
     handleDeleteCard(card);
@@ -19,6 +19,10 @@ function Card({
     handleSelectedCard(card);
   };
   const onCardLike = () => {
+    console.log(currentUser);
+    console.log(isOwn);
+    console.log(isLiked);
+    console.log(card.owner);
     handleCardLike(card);
   };
 
