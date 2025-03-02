@@ -37,6 +37,14 @@ const allowedCors = [
 app.use(cors({ origin: allowedCors }));
 
 
+//crash test (***remover despues de revision**)
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("The server is going to fall");
+  }, 0);
+});
+
+
 /*
 app.use((req, res, next) => {
   req.user = {
