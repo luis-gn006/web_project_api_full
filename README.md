@@ -66,7 +66,8 @@ El proyecto está estructurado en componentes de **React**. A continuación, se 
 
 ## Video de demostración:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WeMoGTPZ2Yw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Ver el video](http://img.youtube.com/vi/WeMoGTPZ2Yw/0.jpg)](https://youtu.be/WeMoGTPZ2Yw)
+
 
 ---
 
