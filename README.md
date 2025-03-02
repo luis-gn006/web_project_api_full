@@ -64,7 +64,9 @@ El proyecto está estructurado en componentes de **React**. A continuación, se 
 
 **Nota:** Este link es temporal ya que se está utilizando el periodo de prueba de Google Cloud. Cuando ya no esté disponible, pueden visualizar el funcionamiento de la página en este video.
 
-[![Watch the video](http://img.youtube.com/vi/WeMoGTPZ2Yw/0.jpg)](https://youtu.be/WeMoGTPZ2Yw)
+## Video de demostración:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WeMoGTPZ2Yw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ---
 
