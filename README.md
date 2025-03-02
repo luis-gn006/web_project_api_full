@@ -16,8 +16,8 @@ El proyecto está optimizado para las siguientes resoluciones:
 
 ## Vista previa del proyecto:
 
-![Vista previa 1](../images/web_api_full2.png)
-![Vista previa 2](../images/web_api_full1.png)
+![Vista previa 1](./images/web_api_full2.png)
+![Vista previa 2](./images/web_api_full1.png)
 
 ## Aprendizajes:
 
@@ -64,7 +64,7 @@ El proyecto está estructurado en componentes de **React**. A continuación, se 
 
 **Nota:** Este link es temporal ya que se está utilizando el periodo de prueba de Google Cloud. Cuando ya no esté disponible, pueden visualizar el funcionamiento de la página en este video.
 
-![Vista previa página](../images/web_api_full.mov)
+![Vista previa página](./images/web_api_full.mov)
 
 ---
 
