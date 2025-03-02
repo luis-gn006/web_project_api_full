@@ -66,7 +66,7 @@ El proyecto está estructurado en componentes de **React**. A continuación, se 
 
 ## Video de demostración:
 
-[![Ver el video](http://img.youtube.com/vi/WeMoGTPZ2Yw/0.jpg)](https://youtu.be/WeMoGTPZ2Yw)
+[![Ver el video](http://img.youtube.com/vi/WeMoGTPZ2Yw/0.jpg)](https://youtu.be/WeMoGTPZ2Yw){:target="_blank"}
 
 
 ---
