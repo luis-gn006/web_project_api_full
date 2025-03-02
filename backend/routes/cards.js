@@ -24,7 +24,7 @@ cardsRouter.post('/cards',
   }),
   createCard);
 cardsRouter.delete('/cards/:cardId', doesCardExist, deleteCard);
-cardsRouter.put('/cards/:cardId/likes', doesCardExist, likeCard);
-cardsRouter.delete('/cards/:cardId/likes', doesCardExist, dislikeCard);
+cardsRouter.put('/cards/likes/:cardId', doesCardExist, likeCard);
+cardsRouter.delete('/cards/likes/:cardId', doesCardExist, dislikeCard);
 
 module.exports = cardsRouter;

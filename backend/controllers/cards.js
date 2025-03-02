@@ -61,7 +61,6 @@ module.exports.likeCard = (req, res) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .populate("owner")
     .then((card) => res.send({ message: 'Tarjeta actualizada', data: card }))
     .catch((err) => {
       const serverError = new ApiError();
@@ -81,7 +80,6 @@ module.exports.dislikeCard = (req, res) => {
     { $pull: { likes: req.user._id } },
     { new: true },
   )
-    .populate("owner")
     .then((card) => res.send({ message: 'Tarjeta actualizada', data: card }))
     .catch((err) => {
       const serverError = new ApiError();
