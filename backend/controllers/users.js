@@ -80,6 +80,7 @@ module.exports.updateUser = (req, res) => {
 
 module.exports.updateAvatar = (req, res) => {
   const { avatar } = req.body;
+  console.log(req.user._id);
   userSchema.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
     .then((user) => res.send({ message: 'Usuario actualizado', user }))
     .catch((err) => {
@@ -97,7 +98,7 @@ module.exports.updateAvatar = (req, res) => {
         res.status(serverError.statusCode).send({
           error: {
             name: serverError.name,
-            message: serverError.message,
+            message: err.message,
             statusCode: serverError.statusCode,
           },
         });
@@ -143,8 +144,8 @@ module.exports.getCurrentUser = (req,res) => {
 
   .catch((err) => {
     const statusCode = err.statusCode || 500;
-    res
-      .status(statusCode)
-      .send({ message: "Error finding User", error: err.message });
+      if (!res.headersSent) {
+        res.status(statusCode).send({ message: "Error finding User", error: err.message });
+      }
   });
 }

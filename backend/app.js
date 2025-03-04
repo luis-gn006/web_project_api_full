@@ -55,6 +55,13 @@ app.use((req, res, next) => {
 });
 */
 
+//crash test (***remover despues de revision**)
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("The server is going to fall");
+  }, 0);
+});
+
 app.post('/signin',
   celebrate({
     body: Joi.object().keys({
