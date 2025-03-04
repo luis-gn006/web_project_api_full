@@ -92,8 +92,8 @@ function App() {
   }
   //Actualizar info perfil
   const handleUpdateUser = async ({ name, about }) => {
-    return await api.patchUserInfo(name, about).then(({data}) => {
-      setCurrentUser(data);
+    return await api.patchUserInfo(name, about).then(({user}) => {
+      setCurrentUser(user);
       closeAllPopups();
     });
   };
@@ -106,8 +106,8 @@ function App() {
   };
   //Actualizar avatar
   const handleUpdateAvatar = async ({ avatar }) => {
-    return await api.patchUserAvatar(avatar).then(({data}) => {
-      setCurrentUser(data);
+    return await api.patchUserAvatar(avatar).then(({user}) => {
+      setCurrentUser(user);
       closeAllPopups();
     });
   };
@@ -134,7 +134,6 @@ function App() {
       .catch((err) => {
         console.log(err);
         setIsLoggedIn(false);
-        setInfoErrorPopupOpen(true);
       });
   }
 
@@ -273,13 +272,6 @@ function App() {
             icon={popupCheck}
             onClose={closeAllPopups}
             isOpen={isInfoOkPopupOpen}
-            />
-        <InfoTooltip
-            name={'error'}
-            message={'Algo salió mal. Por favor, verifica tus credenciales.'}
-            icon={popupCross}
-            onClose={closeAllPopups}
-            isOpen={isInfoErrorPopupOpen}
             />
             </>
             } />
