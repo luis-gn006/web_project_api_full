@@ -133,6 +133,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setInfoErrorPopupOpen(true);
         setIsLoggedIn(false);
       });
   }
@@ -272,6 +273,13 @@ function App() {
             icon={popupCheck}
             onClose={closeAllPopups}
             isOpen={isInfoOkPopupOpen}
+            />
+        <InfoTooltip
+            name={'error'}
+            message={'Algo salió mal. Por favor, verifica tus credenciales.'}
+            icon={popupCross}
+            onClose={closeAllPopups}
+            isOpen={isInfoErrorPopupOpen}
             />
             </>
             } />
